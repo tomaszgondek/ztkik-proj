@@ -86,36 +86,3 @@ Przydatne opcje:
 
 Do szybkiego testu warto najpierw użyć niewielkiego wycinka rozpakowanych danych
 i wyjścia `.txt`; pełny plik uruchomić dopiero po obejrzeniu plików kontrolnych.
-
-## Analiza z perspektywy drugiej grupy
-
-Skrypt `analyze_logs.py` analizuje wyłącznie zmodyfikowany log i nie korzysta z
-pliku ground truth ani metadanych generatora. Jeżeli w `output` znajduje się
-jeden plik ze słowem `modified` w nazwie, wystarczy:
-
-```powershell
-.\.venv\Scripts\python.exe .\analyze_logs.py
-```
-
-Powstanie `output\analysis-report.html`. Raport zawiera dokładne timestampy
-kandydatów początku incydentu, wykres wolumenu,
-godzinowego fan-out, równoczesnych serii, ranking anomalii, analizę okresowości
-i graf podejrzanych relacji użytkownik–komputer.
-
-Przy wielu plikach wejście i nazwę raportu można wskazać jawnie:
-
-```powershell
-.\.venv\Scripts\python.exe .\analyze_logs.py `
-  lanl-auth-dataset-1-modified.bz2 `
-  monthly-analysis.html
-```
-
-Analiza pełnego skompresowanego zbioru także jest strumieniowa, ale wymaga
-pełnej dekompresji i odczytania wszystkich rekordów. Istniejący raport można
-zastąpić opcją `--force`.
-
-Wygląd raportu można obejrzeć bez danych wejściowych:
-
-```powershell
-.\.venv\Scripts\python.exe .\analyze_logs.py --demo --force
-```
